@@ -1,0 +1,52 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+ srand((unsigned)time(NULL));
+ setlocale(LC_ALL, ".1251");
+ system("color 0F");
+
+ int A[100][100];
+ int n, k, i;
+ char z;
+
+ while (true)
+ {
+ a:printf("Введiть n вiд 3 до 20  ");
+  cin >> n;
+  if (n < 3 || n > 20)
+  {
+   printf("Невiрне введення  ");
+   goto a;
+  }
+
+  std::vector<std::vector<int>> v(n, std::vector<int>(n));
+
+  size_t i = 0, j = n - 1;
+
+  int value = n * n;
+
+  while (n != 0)
+  {
+   size_t k = 0;
+   do { v[i][j--] = value--; } while (++k < n - 1);
+   for (k = 0; k < n - 1; k++) v[i++][j] = value--;
+   for (k = 0; k < n - 1; k++) v[i][j++] = value--;
+   for (k = 0; k < n - 1; k++) v[i--][j] = value--;
+
+   ++i; --j; n = n < 2 ? 0 : n - 2;
+  }
+
+  for (const auto& row : v)
+  {
+   for (int x : row) std::cout << std::setw(2) << x << ' ';
+   std::cout << std::endl;
+  }
+
+  std::cout << std::endl;
+ }
+}
